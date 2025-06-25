@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Contentful Color Picker Extension</title>
+    <script src="https://unpkg.com/contentful-ui-extensions-sdk"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 10px;
+      }
+      input[type="color"] {
+        width: 100px;
+        height: 40px;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <label for="colorPicker">try this ext Color</label>
+    <input type="color" id="colorPicker" />
+    <script>
+      window.contentfulExtension.init(function (extension) {
+        const colorInput = document.getElementById('colorPicker');
+
+        // Load existing value
+        const currentColor = extension.field.getValue() || '#ffffff';
+        colorInput.value = currentColor;
+
+        // Handle color change
+        colorInput.addEventListener('input', function () {
+          extension.field.setValue(colorInput.value);
+        });
+
+        // Auto-resize
+        extension.window.startAutoResizer();
+      });
+    </script>
+  </body>
+</html>
