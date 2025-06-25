@@ -1,0 +1,23 @@
+name: Deploy Static HTML to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # This triggers the workflow whenever code is pushed to the "main" branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository's code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 3: Deploy files to GitHub Pages
+      - name: Deploy HTML files to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./ # The root directory where your HTML files are located
+          # If your HTML files are in a `dist` folder, update `publish_dir: ./dist`
